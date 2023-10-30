@@ -74,6 +74,7 @@ impl BuildExtend for Build {
             }
             _ => panic!("failed to configure openmp for unsupported compiler"),
         };
+        self.define("LIBSAIS_OPENMP", None);
         self
     }
 
