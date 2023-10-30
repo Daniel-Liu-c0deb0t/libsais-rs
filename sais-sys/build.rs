@@ -33,13 +33,13 @@ impl BuildExtend for Build {
 
         match self.tool_type() {
             ToolType::ClangLike => self.opt_level_str("fast"),
-            ToolType::GnuLike => self.opt_level(2),
+            ToolType::GnuLike => self.opt_level(3),
             ToolType::MsvcLike => self.opt_level(2),
             _ => panic!("failed to configure compiler"),
         };
 
         match (self.target_arch(), self.tool_type()) {
-            (Architecture::X86_64, ToolType::ClangLike | ToolType::GnuLike) => self.flag("-march=skylake"),
+            (Architecture::X86_64, ToolType::ClangLike | ToolType::GnuLike) => self.flag("-march=native"),
             (Architecture::X86_64, ToolType::MsvcLike) => self.flag("/arch:AVX2"),
             _ => self,
         };
